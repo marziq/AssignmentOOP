@@ -1,3 +1,5 @@
+package Assignment;
+
 public class Person {
     private String name;
     private String contact_number;
