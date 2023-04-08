@@ -1,6 +1,4 @@
 # AssignmentOOP
-OPEN SOURCE (JANGAN TIRU)
-APA-APA PERTANYAAN OR ANYTHNG? Discuss about
 
 Question
 Imagine you have an online business that sells a range of products online.  Write a complete program that has two classes:
