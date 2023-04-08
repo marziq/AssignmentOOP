@@ -22,6 +22,11 @@ public class main {
         System.out.println("Marziq TechEnterprise\nPC Parts Products\n\nThese are products available: ");
 
         do{
+            //check limit order
+            if(order.getOrderCounts() >= 50) {
+                System.out.println("Maximum order reached! ");
+                break;
+            }
             System.out.println("----code--Product----------Price----------");
             for (int i = 0; i < Product.getProductCounts(); i++) {
                 System.out.println((i+1) + "-" + product[i].printProduct());
@@ -54,10 +59,6 @@ public class main {
             System.out.print("\n\nMore order? (Y or N): ");
             ans = input.next().charAt(0);
             System.out.println("");
-            if(Booking.getOrderCounts() >= 50){
-                System.out.println("Maximum order reached! ");
-                break;
-            }
         }while(ans == 'Y' || ans == 'y');
         System.out.println("Total orders: " + order.getOrderCounts());
         System.out.printf("Total sales: RM%.2f\n", customer.getTotalPurchase() );
