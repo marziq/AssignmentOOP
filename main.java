@@ -54,7 +54,7 @@ public class main {
             System.out.print("\n\nMore order? (Y or N): ");
             ans = input.next().charAt(0);
             System.out.println("");
-            if(Booking.getOrderCounts() > 50){
+            if(Booking.getOrderCounts() >= 50){
                 System.out.println("Maximum order reached! ");
                 break;
             }
