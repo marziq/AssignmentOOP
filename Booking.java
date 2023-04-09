@@ -5,6 +5,7 @@ public class Booking {
     private int product_code;
     private int quantity;
     private static int orderCounts = 0;
+    private static int quantityCounts= 0;
 
     Booking(){
     }
@@ -38,4 +39,11 @@ public class Booking {
     public void setOrderCounts(){
         orderCounts++;
     }
+    public void setQuantityCounts(int quantityCounts){
+        this.quantityCounts += quantityCounts;
+    }
+    public int getQuantityCounts(){
+        return quantityCounts;
+    }
 }
+
