@@ -23,7 +23,7 @@ public class main {
 
         do{
             //check limit order
-            if(order.getOrderCounts() >= 50) {
+            if(order.getQuantityCounts() >= 50) {
                 System.out.println("Maximum order reached! ");
                 break;
             }
@@ -46,6 +46,7 @@ public class main {
             System.out.print("Order quantity: ");
             order.setQuantity(input.nextInt());
 
+            order.setQuantityCounts(order.getQuantity()); //increment quantity ordered
             order.setOrderCounts(); // increment ordercounts
 
             //output@receipt
@@ -58,11 +59,13 @@ public class main {
 
             System.out.print("\n\nMore order? (Y or N): ");
             ans = input.next().charAt(0);
-            System.out.println("");
+            System.out.println(" ");
+
         }while(ans == 'Y' || ans == 'y');
-        System.out.println("Total orders: " + order.getOrderCounts());
+        System.out.println("Total orders: " + Booking.getOrderCounts());
         System.out.printf("Total sales: RM%.2f\n", customer.getTotalPurchase() );
         System.out.println("\nEND OF PROGRAM");
     }
 
 }
+
