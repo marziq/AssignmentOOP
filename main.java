@@ -42,9 +42,14 @@ public class main {
             System.out.print("Enter code of product: ");
             order.setProductCode(input.nextInt());
 
-            //get quantity
+            //get quantity and also check if it more than 50 or not
             System.out.print("Order quantity: ");
             order.setQuantity(input.nextInt());
+
+            if(order.getQuantity() + order.getQuantityCounts() > 50){
+                System.out.println("Maximum quantity ordered reached!");
+                break;
+            }
 
             order.setQuantityCounts(order.getQuantity()); //increment quantity ordered
             order.setOrderCounts(); // increment ordercounts
