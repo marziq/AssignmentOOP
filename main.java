@@ -24,7 +24,7 @@ public class main {
         do{
             //check limit order
             if(order.getQuantityCounts() >= 50) {
-                System.out.println("Maximum order reached! ");
+                System.out.println("Maximum quantity order reached! ");
                 break;
             }
             System.out.println("----code--Product----------Price----------");
