@@ -1,29 +1,29 @@
 package Assignment;
 
 public class Agent extends Person{
-
-    private String company;
-    private double salary = 0;
-
+    private final double COMMISSION_RATE = 0.15;
+    private double commission = 0;
+    private static int agentCounts = 0;
     Agent(){
+        agentCounts++;
     }
-    Agent(String name, String contact_number, String address, String company, double salary){
+    Agent(String name, String contact_number, String address, double commission){
         setName(name);
         setContact(contact_number);
         setAddress(address);
-       this.company = company;
-       this.salary = salary;
+       this.commission = commission;
+       agentCounts++;
     }
-    String getCompany(){
-        return company;
+    double getCommission(){
+        return commission;
     }
-    double getSalary(){
-        return salary;
+    void setCommission(double commission){
+        this.commission += commission;
     }
-    void setCompany(String company){
-        this.company = company;
+    double getRate(){
+        return COMMISSION_RATE;
     }
-    void setSalary(double salary){
-        this.salary = salary;
+    static int getAgentCounts(){
+        return agentCounts;
     }
 }
