@@ -16,7 +16,7 @@ public class Customer extends Person{
     public void updatePurchase(double amount){
         totalPurchase += amount;
     }
-    public int getNumCustomers(){
+    public static int getNumCustomers(){
         return numCustomers;
     }
     public double getTotalPurchase(){
