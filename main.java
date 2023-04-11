@@ -6,71 +6,100 @@ import java.io.IOException;
 public class main {
 
     public static void main(String[] args)throws IOException{
-        char ans;
+        char ans = 'y';
+        int chooseAgent;
+        int customerIndex = 0;
+        boolean isExist = false;
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in)); // to read string (customer name)
         java.util.Scanner input = new java.util.Scanner(System.in); // to read other input
-        Customer customer = new Customer();
+        Customer[] customer = new Customer[100];
         Product[] product = new Product[5];
         Booking order = new Booking();
+        Agent[] agent = new Agent[3];
 
-        product[0] = new Product(1,"RTX4090 Ti", 10900);
-        product[1] = new Product(2,"Intel i9 11900K", 7600);
-        product[2] = new Product(3,"Coolermaster PSU 1000W", 1500);
-        product[3] = new Product(4,"Samsung UltraSpeed SSD 3TB", 3400);
-        product[4] = new Product(5,"Kingston DDR5 32GB 2x2 RAM", 2000);
+        for(int i = 0;i < customer.length; i++)
+            customer[i] = new Customer();
+        int customerCounts = 0;
 
-        System.out.println("Marziq TechEnterprise\nPC Parts Products\n\nThese are products available: ");
+        agent[0] = new Agent("Ali Andalas", "011-113243213", "KL", 0);
+        agent[1] = new Agent("George Lee", "012-343213377", "SEREMBAN", 0);
+        agent[2] = new Agent("Maryam Abdullah", "018-57715660", "JOHOR", 0);
+        product[0] = new Product(1,"Langkawi Island Tour", 500);
+        product[1] = new Product(2,"Krabi Island Tour", 800);
+        product[2] = new Product(3,"Perhentian Island Tour", 700);
 
         do{
-            //check limit order
-            if(order.getQuantityCounts() >= 50) {
-                System.out.println("Maximum quantity order reached! ");
+            System.out.println("\nWelcome to Skidamark Travel Agency\n\nChoose agent: ");
+            for(int i = 0; i < agent.length; i++)
+                System.out.println("   "+ (i+1) + ". " + agent[i].getName());
+
+            System.out.print("Choose agent: ");
+            chooseAgent = input.nextInt();
+            chooseAgent--;
+            System.out.print("Enter Customer Name: ");
+            String customerName = reader.readLine();
+
+            for(int i = 0; i <= customerCounts; i++)
+            if(customerName.equalsIgnoreCase(customer[i].getName())){
+                isExist = true;
                 break;
             }
-            System.out.println("----code--Product----------Price----------");
-            for (int i = 0; i < Product.getProductCounts(); i++) {
-                System.out.println((i+1) + "-" + product[i].printProduct());
-            }
-            System.out.println("------------------------------------------");
-            System.out.println("Total number of products: " + Product.getProductCounts());
-
-            //get customer name
-            System.out.print("Enter customer name: ");
-            order.setCustomerName(reader.readLine());
-
-            //get product ordered
-            System.out.print("Enter code of product: ");
-            order.setProductCode(input.nextInt());
-
-            //get quantity and also check if it more than 50 or not
-            System.out.print("Order quantity: ");
-            order.setQuantity(input.nextInt());
-
-            if(order.getQuantity() + order.getQuantityCounts() > 50){
-                System.out.println("Maximum quantity ordered reached!");
-                break;
+            if(isExist)
+                System.out.println("Customer is a registered customer");
+            else{
+                System.out.println("Customer is not yet registered\n");
+                System.out.print("Enter Name: ");
+                customerName = reader.readLine();
+                System.out.print("Enter Contact No: ");
+                String customerContact = reader.readLine();
+                System.out.print("Enter Address: ");
+                String customerAddress = reader.readLine();
+                System.out.println("New Customer succesfully added\n");
+                customer[customerCounts] = new Customer(customerName,customerContact,customerAddress);
+                customerCounts++;
             }
 
-            order.setQuantityCounts(order.getQuantity()); //increment quantity ordered
-            order.setOrderCounts(); // increment ordercounts
+            System.out.print("Make new booking?(Y/N): ");
+            char booking = input.next().charAt(0);
 
-            //output@receipt
-            System.out.println("\nOrder by " + order.getCustomerName());
-            System.out.println("Item ordered: " + product[order.getProductCode() - 1].getName());
-            System.out.println("Order quantity: " + order.getQuantity());
-            System.out.printf("Amount of order is RM%.2f", (order.getQuantity() * product[order.getProductCode() - 1].getPrice()));
+            switch(booking){
+                case 'y': case 'Y':break;
+                default: continue;
+            }
 
-            customer.updatePurchase((order.getQuantity() * product[order.getProductCode() - 1].getPrice()));
 
-            System.out.print("\n\nMore order? (Y or N): ");
+            System.out.println("Available packages: ");
+            for(int i = 0;i < Product.getProductCounts(); i++)
+                System.out.println("  " + (i+1) + ". " + product[i].getName() + "    RM" + product[i].getPrice());
+            System.out.print("Choose package: ");
+            int customerPackage = input.nextInt();
+            customerPackage--;
+            System.out.print("Enter Quantity: ");
+            int quantity = input.nextInt();
+
+            double total = quantity*product[customerPackage].getPrice(); // total amount
+
+            System.out.println("You have chosen " + product[customerPackage].getName() + " for " + quantity + " pax");
+            System.out.printf("Amount of package is RM%.2f\n", total);
+
+            //get array index
+            for(int i =0; i <= customerCounts; i++)
+                if(customerName.equalsIgnoreCase(customer[i].getName()))
+                    customerIndex = i;
+
+            customer[customerIndex].updatePurchase(total); //update customer purcase
+            agent[chooseAgent].setCommission(total*agent[chooseAgent].getRate()); // add commision
+            System.out.print("\nAnother booking(Y/N)?:  ");
             ans = input.next().charAt(0);
-            System.out.println(" ");
+            isExist = false;
+        }while(ans == 'y' || ans == 'Y');
 
-        }while(ans == 'Y' || ans == 'y');
-        System.out.println("Total orders: " + Booking.getOrderCounts());
-        System.out.printf("Total sales: RM%.2f\n", customer.getTotalPurchase() );
-        System.out.println("\nEND OF PROGRAM");
+        System.out.println("Summary report by agent\n");
+        System.out.println("     Name of Agent\t Commision");
+        System.out.println("----------------------------------");
+        for(int i = 0; i < Agent.getAgentCounts(); i++)
+            System.out.printf("     %d. %-20s RM%.2f\n", i+1, agent[i].getName(), agent[i].getCommission());
+
     }
 
 }
-
