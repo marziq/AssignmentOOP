@@ -19,20 +19,22 @@ public class main {
 
         for(int i = 0;i < customer.length; i++)
             customer[i] = new Customer();
-        int customerCounts = 2; // start 2 because already have 3 customer (2 is index)
-
         customer[0] = new Customer("Ammar Haziq", "0198389538", "Melayu Raya");
         customer[1] = new Customer("Ahmad Haikal", "0111234765", "Pekan Nanas");
         customer[2] = new Customer("Mior Ahmad", "01234567890", "Pontian");
         agent[0] = new Agent("George Lopez", "011-113243213", "KL", 0);
         agent[1] = new Agent("Giga Hadid", "012-343213377", "SEREMBAN", 0);
         agent[2] = new Agent("Mohd Salahuddin", "018-57715660", "JOHOR", 0);
-        product[0] = new Product(1,"Langkawi Island Tour", 500);
-        product[1] = new Product(2,"Krabi Island Tour", 800);
-        product[2] = new Product(3,"Perhentian Island Tour", 700);
+        product[0] = new Product(1,"Standard Single Room", 150);
+        product[1] = new Product(2,"Standard Double Room", 200);
+        product[2] = new Product(3,"Standard Queen Room", 500);
+        product[3] = new Product(4, "Standard King Room", 800);
+        product[4] = new Product(5, "Executive Suite Room", 1500);
+
+        int customerCounts = Customer.getNumCustomers();
 
         do{
-            System.out.println("\nWelcome to Dreamy Flight booking\n\nChoose agent: ");
+            System.out.println("\nWelcome to Dreamy Hotel booking\n\nChoose agent: ");
             for(int i = 0; i < agent.length; i++)
                 System.out.println("   "+ (i+1) + ". " + agent[i].getName());
 
@@ -107,7 +109,7 @@ public class main {
             booking = new Booking(customerName, customerPackage, booking.getQuantity());
         }while(ans == 'y' || ans == 'Y');
 
-        System.out.println("Summary report by agent\n");
+        System.out.println("\nSummary report by agent\n");
         System.out.println("     Name of Agent\t Commision");
         System.out.println("----------------------------------");
         for(int i = 0; i < Agent.getAgentCounts(); i++)
