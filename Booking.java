@@ -13,22 +13,22 @@ public class Booking {
         this.product_code = product_code;
         this.quantity = quantity;
     }
-    public String getCustomerName() {
+     String getCustomerName() {
         return customer_name;
     }
-    public void setCustomerName(String customer_name) {
+     void setCustomerName(String customer_name) {
         this.customer_name = customer_name;
     }
-    public int getProductCode() {
+     int getProductCode() {
         return product_code;
     }
-    public void setProductCode(int product_code) {
+     void setProductCode(int product_code) {
         this.product_code = product_code;
     }
-    public int getQuantity() {
+     int getQuantity() {
         return quantity;
     }
-    public void setQuantity(int quantity) {
+     void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 }
