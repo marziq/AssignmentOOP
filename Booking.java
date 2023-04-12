@@ -4,8 +4,7 @@ public class Booking {
     private String customer_name;
     private int product_code;
     private int quantity;
-    private static int orderCounts = 0;
-    private static int quantityCounts= 0;
+
 
     Booking(){
     }
@@ -13,7 +12,6 @@ public class Booking {
         this.customer_name = customer_name;
         this.product_code = product_code;
         this.quantity = quantity;
-        orderCounts++;
     }
     public String getCustomerName() {
         return customer_name;
@@ -27,23 +25,12 @@ public class Booking {
     public void setProductCode(int product_code) {
         this.product_code = product_code;
     }
-    public static int getOrderCounts() {
-        return orderCounts;
-    }
     public int getQuantity() {
         return quantity;
     }
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-    public void setOrderCounts(){
-        orderCounts++;
-    }
-    public void setQuantityCounts(int quantityCounts){
-        this.quantityCounts += quantityCounts;
-    }
-    public int getQuantityCounts(){
-        return quantityCounts;
-    }
 }
+
 
